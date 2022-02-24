@@ -1,0 +1,9 @@
+# Module: Mongodb
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-mongodb.html
+# Reference config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: kafka
+  metricsets: ["consumergroup", "partition"]
+  period: 10s
+  hosts: ["10.136.121.57:9092","10.136.121.58:9092","10.136.121.59:9092"]
+

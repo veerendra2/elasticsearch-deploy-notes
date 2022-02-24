@@ -1,0 +1,9 @@
+metricbeat:
+  image: docker.elastic.co/beats/packetbeat:7.6.1
+  user: packetbeat
+  volumes:
+    - ./packetbeat.yml:/usr/share/packetbeat/packetbeat.yml
+  restart: always
+  net: "host"
+  # disable strict permission checks
+  command: ["--strict.perms=false", "-system.hostfs=/hostfs"]

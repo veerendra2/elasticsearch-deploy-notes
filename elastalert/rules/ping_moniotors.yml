@@ -1,0 +1,29 @@
+name: Ping mydomain.org [Alert]
+type: frequency
+index: heartbeat-*
+num_events: 5
+timeframe:
+    minutes: 2
+
+filter:
+- query:
+    query_string:
+      query: "monitor.name: ping* url.domain: mydomain.org AND monitor.status: down"
+
+alert_text: |
+        The service {0} seem down, seen at "{1}", observed from "{2}({8})". Please investigate the issue
+        ** Summary **
+        IP - {3}
+        Status - {4}
+        Number of hits - {5}
+        Number of matches - {6}
+        HTTP Status Code - {7}
+alert_text_type: alert_text_only
+alert_text_args: ["url.full", "@timestamp", "observer.geo.name", "monitor.ip", "monitor.status", "num_hits", "num_matches", "http.status_code", "observer.hostname"]
+alert:
+- "email"
+
+email:
+- "email@gmail.com"
+
+

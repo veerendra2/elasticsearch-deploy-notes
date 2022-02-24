@@ -1,0 +1,6 @@
+heatbeat:
+  image: docker.elastic.co/beats/heartbeat:7.6.1
+  volumes:
+    - ./heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro
+  restart: always
+  net: "host"

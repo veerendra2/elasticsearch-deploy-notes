@@ -1,0 +1,113 @@
+# Heartbeat
+# Docs: https://www.elastic.co/guide/en/beats/heartbeat/current/index.html
+# Reference config docs: https://github.com/elastic/beats/blob/master/heartbeat/heartbeat.reference.yml
+
+heartbeat.monitors:
+
+- type: http
+  name: portal
+  schedule: '@every 20s'
+  hosts:
+    - https://mydomain.com/status
+  check:
+    status: 200
+    json:
+      - description: check_status
+        condition:
+          equals:
+            status: ok
+- type: http
+  name: https_mydomain.com
+  schedule: '@every 20s'
+  hosts:
+    - https://www.mydomain.com
+  ssl:
+    certificate_authorities: ['/etc/letsencryptauthorityx3.pem']
+  check.response.status: 200
+
+- type: icmp
+  name: ping_mydomain.com
+  schedule: '@every 20s'
+  hosts:
+    - mydomain.com
+
+- type: http
+  name: portal
+  schedule: '@every 20s'
+  hosts:
+    - http://service02.local:10000/api/status
+    - http://service01.local:10000/api/status
+  check.receive: 'ok'
+  check.response.status: 200
+
+- type: http
+  name: auditlog
+  schedule: '@every 20s'
+  hosts:
+    - http://service01.local:10001/api/status
+    - http://service02.local:10001/api/status
+  check.receive: 'ok'
+  check.response.status: 200
+
+- type: tcp
+  name: postgresql
+  schedule: '@every 20s'
+  ports: 5432
+  hosts:
+    - db01.local
+    - db02.local
+
+- type: tcp
+  name: mongod
+  schedule: '@every 20s'
+  ports: 27017
+  hosts:
+    - cluster01.local
+    - cluster02.local
+    - cluster03.local
+
+- type: tcp
+  name: kafka
+  schedule: '@every 20s'
+  ports: 9092
+  hosts:
+    - cluster01.local
+    - cluster02.local
+    - cluster03.local
+
+- type: tcp
+  name: redis
+  schedule: '@every 20s'
+  ports: 6379
+  hosts:
+    - cluster01.local
+    - cluster02.local
+    - cluster03.local
+
+- type: icmp
+  name: pings
+  schedule: '@every 20s'
+  hosts:
+    - server02.local
+    - server01.local
+
+
+output.elasticsearch:
+  hosts: ['https://mydomain.com:9201']
+  username: elastic
+  password: xxxxxxxxxx
+  ssl:
+    certificate_authorities: ["/etc/ssl/beats/elasticsearch-ca.pem"]
+
+setup.dashboards:
+  enabled: true
+
+setup.kibana:
+  host: "https://elk-staging.mydomain.com:5691"
+  ssl:
+    certificate_authorities: ["/etc/ssl/beats/letsencryptauthorityx3.pem"]
+
+processors:
+- add_observer_metadata:
+    geo:
+      name: internal

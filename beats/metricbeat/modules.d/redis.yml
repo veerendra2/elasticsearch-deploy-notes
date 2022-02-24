@@ -1,0 +1,11 @@
+# Module: Redis
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-redis.html
+# Reference config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: redis
+  metricsets: ["info", "keyspace"]
+  period: 10s
+
+  # Redis hosts
+  hosts: ["127.0.0.1:6379"]
+  password: xxxxxxxxxxxx

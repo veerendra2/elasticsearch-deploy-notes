@@ -1,0 +1,18 @@
+heartbeat.monitors:
+- type: http
+  schedule: '@every 5s'
+  urls:
+    - http://127.0.0.1:9972
+
+- type: icmp
+  schedule: '@every 5s'
+  hosts:
+    - 127.0.0.1
+
+output.elasticsearch:
+  hosts: '127.0.0.1:9200'
+  username: 'elastic'
+  password: 'changeme'
+
+setup.kibana:
+  host: "127.0.0.1:5601"

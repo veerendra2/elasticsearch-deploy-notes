@@ -1,0 +1,19 @@
+filebeat:
+  image: docker.elastic.co/beats/journalbeat:7.6.2
+  user: root
+  volumes:
+    - /var/log/journal:/var/log/journal:ro
+    - /etc/machine-id:/etc/machine-id
+    - /run/systemd:/run/systemd
+    - /etc/hostname:/etc/hostname:ro
+    - ./journalbeat.yml:/usr/share/journalbeat/filebeat.yml
+    - ./filebeat:/usr/share/journalbeat/data
+  restart: always
+  net: "host"
+  environment:
+    - ELASTICSEARCH_HOST=127.0.0.1
+    - KIBANA_HOST=127.0.0.1
+    - ELASTICSEARCH_USERNAME=elastic
+    - ELASTICSEARCH_PASSWORD=changeme
+  # disable strict permission checks
+  command: ["--strict.perms=false"]

@@ -1,0 +1,16 @@
+journalbeat.inputs:
+- paths: /var/log/journal
+  seek: tail
+
+output.elasticsearch:
+  hosts: ["${ELASTICSEARCH_HOST}:9200"]
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+
+setup.dashboards:
+  enabled: false
+
+setup.kibana:
+  host: "${KIBANA_HOST}:5601"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}

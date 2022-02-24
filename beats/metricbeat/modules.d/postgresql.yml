@@ -1,0 +1,12 @@
+# Module: postgresql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.6/metricbeat-module-postgresql.html
+# Reference Docs: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: postgresql
+  hosts:
+    - postgres://127.0.0.1:5432?sslmode=disable
+  metricsets:
+    - database
+    - bgwriter
+    - activity
+    - statements # This require additional config

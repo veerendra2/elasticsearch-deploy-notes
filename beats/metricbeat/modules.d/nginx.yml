@@ -1,0 +1,10 @@
+# Module: nginx
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.6/metricbeat-module-nginx.html
+# Reference config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: nginx
+  metricsets: ["stubstatus"]
+  hosts:
+    - "http://127.0.0.1"
+
+  server_status_path: "nginx_status"

@@ -1,0 +1,8 @@
+# Module: Mongodb
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-mongodb.html
+# Reference config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: mongodb
+  metricsets: ["dbstats", "status", "collstats", "metrics", "replstatus"]
+  hosts: ["mongodb://beats:xxxxx@10.136.121.57:27017?authSource=xxxx&replicaSet=rs0"]
+  period: 10s

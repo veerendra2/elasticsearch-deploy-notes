@@ -1,0 +1,14 @@
+metricbeat:
+  image: docker.elastic.co/beats/metricbeat:7.6.1
+  user: root
+  volumes:
+    - /proc:/hostfs/proc:ro
+    - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+    - /:/hostfs:ro
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+    - ./metricbeat:/usr/share/metricbeat/data
+  restart: always
+  net: "host"
+  # disable strict permission checks
+  command: ["--strict.perms=false", "-system.hostfs=/hostfs"]

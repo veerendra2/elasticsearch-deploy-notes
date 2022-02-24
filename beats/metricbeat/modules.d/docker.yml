@@ -1,0 +1,17 @@
+# Module: docker
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/master/metricbeat-module-docker.html
+# Auto Discover Docs: https://www.elastic.co/guide/en/beats/metricbeat/current/configuration-autodiscover-hints.html
+# Reference Config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: docker
+  metricsets:
+    - container
+    - cpu
+    - diskio
+    - event
+    - healthcheck
+    - info
+    - memory
+    - network
+  period: 10s
+  hosts: ["unix:///var/run/docker.sock"]

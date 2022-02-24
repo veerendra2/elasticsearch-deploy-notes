@@ -1,0 +1,45 @@
+PUT _ilm/policy/heartbeat
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "rollover": {
+            "max_age": "12h",
+            "max_size": "10mb"
+          }
+        }
+      },
+      "warm": {
+        "actions": {
+          "allocate": {
+            "include": {},
+            "exclude": {},
+            "require": {
+              "machine": "edge-machine.yourdomain.com"
+            }
+          }
+        }
+      },
+      "cold": {
+        "min_age": "12h",
+        "actions": {
+          "allocate": {
+            "include": {},
+            "exclude": {},
+            "require": {
+              "machine": "edge-machine.yourdomain.com"
+            }
+          }
+        }
+      },
+      "delete": {
+        "min_age": "30m",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}

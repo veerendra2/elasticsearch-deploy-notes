@@ -1,0 +1,8 @@
+# Module: Zookeeper
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-zookeeper.html
+# Reference config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+- module: zookeeper
+  metricsets: ["mntr", "server"]
+  period: 10s
+  hosts: ["10.136.121.57:2181","10.136.121.58:2181","10.136.121.59:2181"]

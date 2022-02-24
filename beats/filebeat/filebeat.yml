@@ -1,0 +1,25 @@
+# https://github.com/elastic/beats/blob/master/filebeat/filebeat.reference.yml
+
+filebeat.modules:
+- module: nginx
+  access:
+    enabled: true
+    var.paths:
+      - /var/log/nginx/access.log
+      - /var/log/nginx/ssl.access.log
+  error:
+    enabled: true
+    var.paths: ["/var/log/nginx/error.log"]
+
+output.elasticsearch:
+  hosts: ['https://10.29.103.18:9201']
+  username: elastic
+  password: xxxxxxxxxxx
+  ssl:
+    certificate_authorities: ["/etc/metricbeat/elasticsearch-ca.pem"]
+
+setup.kibana:
+  host: "https://10.29.103.18:5691"
+  ssl:
+    certificate_authorities: ["/etc/metricbeat/letsencryptauthorityx3.pem"]
+

@@ -1,0 +1,32 @@
+# Metricbeat
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.6/index.html
+# Reference Config: https://github.com/elastic/beats/blob/master/metricbeat/metricbeat.reference.yml
+
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+metricbeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: true
+  reload.period: 10s
+
+output.elasticsearch:
+  hosts: ['https://elk-staging.yourdomain.com:9201']
+  username: metricbeat_user
+  password: xxxxxxxxxxxx
+  ssl:
+    certificate_authorities: ["/etc/ssl/beats/elasticsearch-ca.pem"]
+
+setup.kibana:
+  host: "https://elk-staging.yourdomain.com:5691"
+  ssl:
+    certificate_authorities: ["/etc/ssl/beats/letsencryptauthorityx3.pem"]
+
+processors:
+- add_docker_metadata: ~
+- add_locale:
+    format: offset
+- add_host_metadata:
+    netinfo.enabled: true
