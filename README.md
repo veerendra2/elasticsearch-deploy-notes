@@ -1,3 +1,4 @@
+![GitHub Repo stars](https://img.shields.io/github/stars/veerendra2/elasticsearch-deploy-notes?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/veerendra2/elasticsearch-deploy-notes?style=plastic)
 # Elasticsearch Cluster
 > This repo contains manual steps to deploy Elasticsearch cluster 
 ### Elasticsearch
